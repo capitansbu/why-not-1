@@ -4,289 +4,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>WHY NOT $1?</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #020702;
-  color: #baffba;
-  font-family: 'Courier New', monospace;
-  text-align: center;
-}
-
-#matrix {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-.ticker {
-  padding: 14px;
-  border-bottom: 1px solid #145c24;
-  color: #00ff66;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.container {
-  max-width: 750px;
-  margin: auto;
-  padding: 95px 20px 50px;
-}
-
-.status {
-  color: #00ff66;
-  font-size: 12px;
-  letter-spacing: 3px;
-}
-
-h1 {
-  font-size: clamp(42px, 9vw, 85px);
-  color: #00ff66;
-  margin: 28px 0;
-  text-shadow: 0 0 25px #008833;
-}
-
-.description {
-  font-size: 16px;
-  line-height: 1.9;
-  color: #b5cbb5;
-  max-width: 560px;
-  margin: 0 auto 45px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.pay-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  background: #061506;
-  color: #00ff66;
-  border: 1px solid #00ff66;
-  padding: 20px 25px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-  min-width: 165px;
-  transition: 0.2s;
-}
-
-.pay-button:hover {
-  background: #00ff66;
-  color: #001800;
-  box-shadow: 0 0 25px #00ff66;
-}
-
-.pay-button.primary {
-  background: #00ff66;
-  color: #001800;
-  box-shadow: 0 0 20px #008833;
-}
-
-.note {
-  margin-top: 25px;
-  font-size: 12px;
-  color: #739173;
-  line-height: 1.8;
-}
-
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 55px;
-  margin: 85px 0 40px;
-  flex-wrap: wrap;
-}
-
-.number {
-  font-size: 32px;
-  color: #00ff66;
-}
-
-.stat-label {
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin-top: 10px;
-  color: #8caa8c;
-}
-
-footer {
-  border-top: 1px solid #145c24;
-  padding: 25px 15px;
-  color: #719071;
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-@media (max-width: 500px) {
-  .container {
-    padding-top: 65px;
-  }
-
-  .buttons {
-    flex-direction: column;
-  }
-
-  .pay-button {
-    width: 100%;
-  }
-
-  .stats {
-    gap: 35px;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;background:#020702;color:#baffba;font-family:'Courier New',monospace;text-align:center}
+#matrix{position:fixed;inset:0;width:100%;height:100%;z-index:-1;opacity:.25;pointer-events:none}
+.ticker{padding:14px;border-bottom:1px solid #145c24;color:#00ff66;font-size:12px;letter-spacing:2px;overflow:hidden;white-space:nowrap}
+.container{max-width:750px;margin:auto;padding:95px 20px 50px}
+.status{color:#00ff66;font-size:12px;letter-spacing:3px}
+h1{font-size:clamp(42px,9vw,85px);color:#00ff66;margin:28px 0;text-shadow:0 0 25px #008833}
+.description{font-size:16px;line-height:1.9;color:#b5cbb5;max-width:560px;margin:0 auto 45px}
+.buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.pay-button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#061506;color:#00ff66;border:1px solid #00ff66;padding:20px 25px;font-family:inherit;font-size:13px;font-weight:bold;cursor:pointer;min-width:165px;transition:.2s}
+.pay-button:hover{background:#00ff66;color:#001800;box-shadow:0 0 25px #00ff66}
+.pay-button.primary{background:#00ff66;color:#001800;box-shadow:0 0 20px #008833}
+.note{margin-top:25px;font-size:12px;color:#739173;line-height:1.8}
+.stats{display:flex;justify-content:center;gap:55px;margin:85px 0 40px;flex-wrap:wrap}
+.number{font-size:32px;color:#00ff66}
+.stat-label{font-size:11px;letter-spacing:2px;margin-top:10px;color:#8caa8c}
+footer{border-top:1px solid #145c24;padding:25px 15px;color:#719071;font-size:12px;line-height:1.8}
+@media(max-width:500px){.container{padding-top:65px}.buttons{flex-direction:column}.pay-button{width:100%}.stats{gap:35px}}
 </style>
 </head>
-
 <body>
-
 <canvas id="matrix"></canvas>
 
-<div class="ticker">
-  LIVE SUPPORTERS // WAITING FOR FIRST HUMAN_
+<div class="ticker" id="ticker">
+LIVE SUPPORTERS // WAITING FOR FIRST HUMAN_
 </div>
 
 <main class="container">
+<div class="status">[ SYSTEM ONLINE // EXPERIMENT 001 ]</div>
+<h1>WHY NOT $1?</h1>
 
-  <div class="status">
-    [ SYSTEM ONLINE // EXPERIMENT 001 ]
-  </div>
+<p class="description">
+An experiment powered by strangers on the internet.
+<br><br>
+What happens when thousands of strangers send just one dollar
+to someone they've never met?
+<br><br>
+<strong>Let's find out.</strong>
+</p>
 
-  <h1>WHY NOT $1?</h1>
+<div class="buttons">
+<a class="pay-button primary" href="https://ko-fi.com/whynot1">$1 — JUST ONE</a>
+<a class="pay-button" href="https://ko-fi.com/whynot1">$3 — WHY NOT MORE?</a>
+<a class="pay-button" href="https://ko-fi.com/whynot1">$5 — SUPPORT MORE</a>
+</div>
 
-  <p class="description">
-    An experiment powered by strangers on the internet.
-    <br><br>
-    What happens when thousands of strangers send
-    just one dollar to someone they've never met?
-    <br><br>
-    <strong>Let's find out.</strong>
-  </p>
+<p class="note">
+ONE-TIME CONTRIBUTION. NO SUBSCRIPTIONS.
+<br>
+SECURE CHECKOUT VIA KO-FI.
+<br>
+SELECT YOUR AMOUNT ON THE PAYMENT PAGE.
+</p>
 
-  <div class="buttons">
-
-    <a
-      class="pay-button primary"
-      href="https://ko-fi.com/whynot1"
-    >
-      $1 — JUST ONE
-    </a>
-
-    <a
-      class="pay-button"
-      href="https://ko-fi.com/whynot1"
-    >
-      $3 — WHY NOT MORE?
-    </a>
-
-    <a
-      class="pay-button"
-      href="https://ko-fi.com/whynot1"
-    >
-      $5 — SUPPORT MORE
-    </a>
-
-  </div>
-
-  <p class="note">
-    ONE-TIME CONTRIBUTION. NO SUBSCRIPTIONS.
-    <br>
-    SECURE CHECKOUT VIA KO-FI.
-    <br>
-    SELECT YOUR AMOUNT ON THE PAYMENT PAGE.
-  </p>
-
-  <section class="stats">
-
-    <div>
-      <div class="number">$0.00</div>
-      <div class="stat-label">TOTAL RAISED</div>
-    </div>
-
-    <div>
-      <div class="number">0</div>
-      <div class="stat-label">HUMANS CONNECTED</div>
-    </div>
-
-  </section>
-
+<section class="stats">
+<div>
+<div class="number" id="total">$0.00</div>
+<div class="stat-label">TOTAL RAISED</div>
+</div>
+<div>
+<div class="number" id="humans">0</div>
+<div class="stat-label">PAYMENTS RECEIVED</div>
+</div>
+</section>
 </main>
 
 <footer>
-  An independent internet experiment.
-  Contributions support the creator personally.
-  This is not a charity.
-  <br><br>
-  © 2026 WHY NOT $1?
+An independent internet experiment.
+Contributions support the creator personally.
+This is not a charity.
+<br><br>
+© 2026 WHY NOT $1?
 </footer>
 
 <script>
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
-
 let drops = [];
 const fontSize = 16;
 
-function resize() {
+function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
-  drops = Array(
-    Math.ceil(canvas.width / fontSize)
-  ).fill(0);
+  drops = Array(Math.ceil(canvas.width/fontSize)).fill(0);
 }
-
 resize();
-
 window.addEventListener("resize", resize);
 
-function draw() {
+function draw(){
   ctx.fillStyle = "rgba(0, 5, 0, 0.07)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+  ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle = "#00ff55";
-  ctx.font = fontSize + "px monospace";
+  ctx.font = fontSize+"px monospace";
 
-  for (let i = 0; i < drops.length; i++) {
-    const digit = Math.random() > 0.5 ? "1" : "0";
-
-    ctx.fillText(
-      digit,
-      i * fontSize,
-      drops[i] * fontSize
-    );
-
-    if (
-      drops[i] * fontSize > canvas.height &&
-      Math.random() > 0.975
-    ) {
-      drops[i] = 0;
+  for(let i=0;i<drops.length;i++){
+    const digit = Math.random()>.5?"1":"0";
+    ctx.fillText(digit,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height && Math.random()>.975){
+      drops[i]=0;
     }
-
     drops[i]++;
   }
 }
+setInterval(draw,55);
 
-setInterval(draw, 55);
+// LIVE PAYMENT STATISTICS
+const API = "https://whynot1-payments.zuluwarrior072.workers.dev/stats";
+
+async function loadStats(){
+  try {
+    const response = await fetch(API, {cache:"no-store"});
+    if(!response.ok) throw new Error("API unavailable");
+
+    const data = await response.json();
+
+    document.getElementById("total").textContent =
+      "$" + Number(data.total_raised || 0).toFixed(2);
+
+    document.getElementById("humans").textContent =
+      Number(data.humans_connected || 0).toLocaleString("en-US");
+
+    const supporters = Array.isArray(data.recent_supporters)
+      ? data.recent_supporters : [];
+
+    const ticker = document.getElementById("ticker");
+
+    if(supporters.length === 0){
+      ticker.textContent =
+        "LIVE SUPPORTERS // WAITING FOR FIRST HUMAN_";
+    } else {
+      ticker.textContent = "LIVE SUPPORTERS // " +
+        supporters.map(s =>
+          (s.nickname || "Anonymous") +
+          " +$" + Number(s.amount || 0).toFixed(2)
+        ).join(" // ");
+    }
+
+  } catch(error){
+    console.error("Could not load stats:", error);
+  }
+}
+
+loadStats();
+setInterval(loadStats,30000);
 </script>
-
 </body>
 </html>
