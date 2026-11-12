@@ -7,6 +7,7 @@
 <title>WHY NOT $1?</title>
 <style>
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: #020702;
@@ -14,6 +15,7 @@ body {
   font-family: 'Courier New', monospace;
   text-align: center;
 }
+
 #matrix {
   position: fixed;
   inset: 0;
@@ -22,6 +24,7 @@ body {
   z-index: -1;
   opacity: .25;
 }
+
 .ticker {
   padding: 14px;
   border-bottom: 1px solid #145c24;
@@ -29,22 +32,26 @@ body {
   font-size: 12px;
   letter-spacing: 2px;
 }
+
 .container {
   max-width: 750px;
   margin: auto;
   padding: 95px 20px 50px;
 }
+
 .status {
   color: #00ff66;
   font-size: 12px;
   letter-spacing: 3px;
 }
+
 h1 {
   font-size: clamp(42px, 9vw, 85px);
   color: #00ff66;
   margin: 28px 0;
   text-shadow: 0 0 25px #008833;
 }
+
 .description {
   font-size: 16px;
   line-height: 1.9;
@@ -52,38 +59,50 @@ h1 {
   max-width: 560px;
   margin: 0 auto 45px;
 }
+
 .buttons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
 }
-button {
+
+.pay-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   background: #061506;
   color: #00ff66;
   border: 1px solid #00ff66;
   padding: 20px 25px;
   font-family: inherit;
+  font-size: 13px;
   font-weight: bold;
   cursor: pointer;
   min-width: 165px;
   transition: .2s;
 }
-button:hover {
+
+.pay-button:hover {
   background: #00ff66;
   color: #001800;
   box-shadow: 0 0 25px #00ff66;
 }
-button.primary {
+
+.pay-button.primary {
   background: #00ff66;
   color: #001800;
   box-shadow: 0 0 20px #008833;
 }
+
 .note {
   margin-top: 25px;
   font-size: 12px;
   color: #739173;
+  line-height: 1.8;
 }
+
 .stats {
   display: flex;
   justify-content: center;
@@ -91,16 +110,19 @@ button.primary {
   margin: 85px 0 40px;
   flex-wrap: wrap;
 }
+
 .number {
   font-size: 32px;
   color: #00ff66;
 }
+
 .stat-label {
   font-size: 11px;
   letter-spacing: 2px;
   margin-top: 10px;
   color: #8caa8c;
 }
+
 footer {
   border-top: 1px solid #145c24;
   padding: 25px 15px;
@@ -108,15 +130,18 @@ footer {
   font-size: 12px;
   line-height: 1.8;
 }
+
 @media(max-width:500px) {
   .container { padding-top: 65px; }
   .buttons { flex-direction: column; }
-  button { width: 100%; }
+  .pay-button { width: 100%; }
   .stats { gap: 35px; }
 }
 </style>
 </head>
+
 <body>
+
 <canvas id="matrix"></canvas>
 
 <div class="ticker">
@@ -124,7 +149,10 @@ footer {
 </div>
 
 <main class="container">
-  <div class="status">[ SYSTEM ONLINE // EXPERIMENT 001 ]</div>
+
+  <div class="status">
+    [ SYSTEM ONLINE // EXPERIMENT 001 ]
+  </div>
 
   <h1>WHY NOT $1?</h1>
 
@@ -138,78 +166,111 @@ footer {
   </p>
 
   <div class="buttons">
-    <button class="primary" onclick="comingSoon()">
+
+    <a class="pay-button primary"
+       href="https://ko-fi.com/whynot1"
+       target="_blank"
+       rel="noopener noreferrer">
       $1 — JUST ONE
-    </button>
-    <button onclick="comingSoon()">
+    </a>
+
+    <a class="pay-button"
+       href="https://ko-fi.com/whynot1"
+       target="_blank"
+       rel="noopener noreferrer">
       $3 — WHY NOT MORE?
-    </button>
-    <button onclick="comingSoon()">
+    </a>
+
+    <a class="pay-button"
+       href="https://ko-fi.com/whynot1"
+       target="_blank"
+       rel="noopener noreferrer">
       $5 — SUPPORT MORE
-    </button>
+    </a>
+
   </div>
 
   <p class="note">
     ONE-TIME CONTRIBUTION. NO SUBSCRIPTIONS.
     <br>
-    PAYMENTS COMING SOON.
+    SECURE CHECKOUT VIA KO-FI.
+    <br>
+    SELECT YOUR AMOUNT ON THE PAYMENT PAGE.
   </p>
 
   <section class="stats">
+
     <div>
       <div class="number">$0.00</div>
       <div class="stat-label">TOTAL RAISED</div>
     </div>
+
     <div>
       <div class="number">0</div>
       <div class="stat-label">HUMANS CONNECTED</div>
     </div>
+
   </section>
+
 </main>
 
 <footer>
   An independent internet experiment.
-  Contributions will support the creator personally.
+  Contributions support the creator personally.
   This is not a charity.
   <br><br>
   © 2026 WHY NOT $1?
 </footer>
 
 <script>
-function comingSoon() {
-  alert("Payments are not available yet. Coming soon!");
-}
-
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
+
 let drops = [];
 const fontSize = 16;
 
 function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  drops = Array(Math.ceil(canvas.width / fontSize)).fill(0);
+
+  drops = Array(
+    Math.ceil(canvas.width / fontSize)
+  ).fill(0);
 }
+
 resize();
+
 window.addEventListener("resize", resize);
 
 function draw() {
   ctx.fillStyle = "rgba(0, 5, 0, 0.07)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   ctx.fillStyle = "#00ff55";
   ctx.font = fontSize + "px monospace";
 
   for (let i = 0; i < drops.length; i++) {
     const digit = Math.random() > 0.5 ? "1" : "0";
-    ctx.fillText(digit, i * fontSize, drops[i] * fontSize);
 
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+    ctx.fillText(
+      digit,
+      i * fontSize,
+      drops[i] * fontSize
+    );
+
+    if (
+      drops[i] * fontSize > canvas.height &&
+      Math.random() > 0.975
+    ) {
       drops[i] = 0;
     }
+
     drops[i]++;
   }
 }
+
 setInterval(draw, 55);
 </script>
+
 </body>
 </html>
